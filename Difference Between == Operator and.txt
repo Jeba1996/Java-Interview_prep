@@ -1,0 +1,164 @@
+Difference Between == Operator and equals() Method in Java
+Last Updated : 4 Jan, 2025
+In Java, the equals() method and the == operator are used to compare objects. The main difference is that string equals() method compares the content equality of two strings while the == operator compares the reference or memory location of objects in a heap, whether they point to the same location or not.
+
+Example:
+
+
+
+
+// the concept of .equals() and == operator
+public class Geeks {
+    public static void main(String[] args) {
+      
+        String s1 = "HELLO";
+        String s2 = "HELLO";
+        String s3 =  new String("HELLO");
+​
+        System.out.println(s1 == s2);
+        System.out.println(s1 == s3); 
+        System.out.println(s1.equals(s2));
+        System.out.println(s1.equals(s3)); 
+    }
+}
+
+Output
+true
+false
+true
+true
+Explanation: When we use the == operator for s1 and s2 comparison, the result is true as both have the same addresses in the String constant pool.
+
+.equals() Method vs == in Java
+Aspects
+
+Equality (==) Operator
+
+.equals() Method
+
+Compares
+
+Compares if two references point to the same memory location.
+
+Compares the content of objects.
+
+Working
+
+Primitives and object references.
+
+Only objects.
+
+Customizable
+
+Cannot be overridden.
+
+Can be overridden in custom classes.
+
+Default Behavior
+
+Compares memory addresses.
+
+Compares references unless overridden.
+
+Equality Operator(==)
+The == operator checks reference equality for objects and value equality for primitives. 
+
+Example 1:
+
+
+
+
+// == operator for compatible data types
+class Geeks {
+    public static void main(String[] args) {
+        
+        // integer-type
+        System.out.println(10 == 20);
+​
+        // char-type
+        System.out.println('a' == 'b');
+​
+        // char and double type
+        System.out.println('a' == 97.0);
+​
+        // boolean type
+        System.out.println(true == true);
+    }
+}
+
+Output
+false
+false
+true
+true
+Example 2: If we apply == for object types then, there should be compatibility between argument types (either child to parent or parent to child or same type). Otherwise, we will get a compile-time error. 
+
+
+// == operator for incompatible data types
+class Geeks {
+    public static void main(String[] args) {
+      
+        Thread t = new Thread();
+        Object o = new Object();
+        String s = new String("GEEKS");
+
+        System.out.println(t == o);
+        System.out.println(o == s);
+      
+        // uncomment the below print 
+        // statement to see the error.
+       // System.out.println(t==s);  
+    }
+}
+Output: 
+
+./Test.java:15: error: incomparable types: Thread and String
+       System.out.println(t==s);
+                           ^
+1 error
+String equals() Method
+In Java, the String equals() method compares the two given strings based on the data/content of the string. If all the contents of both strings are the same, it returns true. If all characters are not matched, then it returns false.
+
+Example:
+
+
+
+
+public class Geeks {
+    public static void main(String[] args) {
+        
+        // Create two new Thread objects
+        Thread t1 = new Thread();
+        Thread t2 = new Thread();
+        
+        // Assign t3 to reference same
+        // Thread object as t1
+        Thread t3 = t1;
+​
+        // Create two String Objects with
+        // Same content
+        String s1 = new String("GEEKS");
+        String s2 = new String("GEEKS");
+​
+        System.out.println(t1 == t3);
+        System.out.println(t1 == t2);
+        System.out.println(s1 == s2);
+​
+        System.out.println(t1.equals(t2));
+        System.out.println(s1.equals(s2));
+    }
+}
+
+Output
+true
+false
+false
+false
+true
+
+Java String Pool and Memory
+String Pool: When two strings have the same content and are created without the new keyword, they point to the same memory location in the pool.
+Heap: Strings created using the new keyword always allocate new memory.
+String s1 = "HELLO"; // String pool
+
+String s2 = new String("HELLO"); // Heap
